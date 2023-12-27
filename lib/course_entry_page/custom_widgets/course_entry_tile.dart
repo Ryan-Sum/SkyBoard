@@ -121,7 +121,7 @@ class CourseEntryTile extends StatelessWidget {
                 children: [
                   TableCell(
                     child: Text(
-                      convertGrade(course.semesterOneGrade),
+                      convertGrade(course.semesterOneGrade!),
                       style: Theme.of(context)
                           .textTheme
                           .bodySmall!
@@ -158,7 +158,7 @@ class CourseEntryTile extends StatelessWidget {
                   ),
                   TableCell(
                     child: Text(
-                      course.yearTaken.year.toString(),
+                      course.yearTaken!.year.toString(),
                       style: Theme.of(context)
                           .textTheme
                           .bodySmall!

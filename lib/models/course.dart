@@ -9,11 +9,11 @@ class Course {
   final String id;
   final String studentId;
   final String courseName;
-  final CourseType courseType;
-  final Subject subject;
-  final DateTime yearTaken;
+  final CourseType? courseType;
+  final Subject? subject;
+  final DateTime? yearTaken;
   final bool isOneSemester;
-  final Grade semesterOneGrade;
+  final Grade? semesterOneGrade;
   final Grade? semesterTwoGrade;
   final Grade finalGrade;
   Course({
@@ -60,11 +60,11 @@ class Course {
       'id': id,
       'student_id': studentId,
       'course_name': courseName,
-      'course_type': courseType.index,
-      'subject': subject.index,
+      'course_type': courseType!.index,
+      'subject': subject!.index,
       'year_taken': yearTaken.toString(),
       'is_one_semester': isOneSemester,
-      'semester_one_grade': semesterOneGrade.index,
+      'semester_one_grade': semesterOneGrade!.index,
       'semester_two_grade':
           semesterTwoGrade == null ? null : semesterTwoGrade!.index,
       'final_grade': finalGrade.index,

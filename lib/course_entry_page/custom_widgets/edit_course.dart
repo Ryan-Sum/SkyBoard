@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sky_board/dashboard_page/dashboard_page.dart';
 import 'package:sky_board/global_widgets/cta_button.dart';
@@ -23,11 +24,11 @@ class EditCourse extends StatefulWidget {
 
 class _EditCourseState extends State<EditCourse> {
   late final TextEditingController courseNameController;
-  CourseType courseType = CourseType.regular;
-  Subject subject = Subject.other;
-  DateTime yearTaken = DateTime.now();
+  CourseType? courseType = null;
+  Subject? subject = Subject.other;
+  DateTime? yearTaken = null;
   bool isOneSemester = false;
-  Grade semOneGrade = Grade.f;
+  Grade? semOneGrade = null;
   Grade? semTwoGrade = null;
   late final GlobalKey<FormState> formKey;
   @override
@@ -85,7 +86,7 @@ class _EditCourseState extends State<EditCourse> {
                       }
                       return null;
                     },
-                    value: subject.name,
+                    value: subject == null ? 'default' : subject!.name,
                     items: [
                       DropdownMenuItem(
                         value: 'default',
@@ -148,7 +149,7 @@ class _EditCourseState extends State<EditCourse> {
                         child: Text(
                             style: Theme.of(context).textTheme.bodyLarge,
                             'Other'),
-                        value: 'Other',
+                        value: 'other',
                       ),
                     ],
                     decoration: InputDecoration(
@@ -230,7 +231,7 @@ class _EditCourseState extends State<EditCourse> {
                       }
                       return null;
                     },
-                    value: courseType.name,
+                    value: courseType == null ? 'default' : courseType!.name,
                     items: [
                       DropdownMenuItem(
                         value: 'default',
@@ -343,7 +344,9 @@ class _EditCourseState extends State<EditCourse> {
                       }
                       return null;
                     },
-                    value: yearTaken.year.toString(),
+                    value: yearTaken == null
+                        ? 'default'
+                        : yearTaken!.year.toString(),
                     items: [
                       DropdownMenuItem(
                         value: 'default',
@@ -436,7 +439,7 @@ class _EditCourseState extends State<EditCourse> {
                     Text("Is One Semester (True/False):"),
                     Spacer(),
                     Switch.adaptive(
-                        value: isOneSemester,
+                        value: isOneSemester == null ? false : isOneSemester!,
                         onChanged: (x) {
                           setState(() {
                             isOneSemester = x;
@@ -454,7 +457,7 @@ class _EditCourseState extends State<EditCourse> {
                       }
                       return null;
                     },
-                    value: semOneGrade.name,
+                    value: semOneGrade == null ? 'default' : semOneGrade!.name,
                     items: [
                       DropdownMenuItem(
                         value: 'default',
@@ -554,7 +557,9 @@ class _EditCourseState extends State<EditCourse> {
                       }
                       return null;
                     },
-                    value: isOneSemester ? null : semTwoGrade!.name,
+                    value: semTwoGrade == null
+                        ? "default"
+                        : (isOneSemester ? null : semTwoGrade!.name),
                     items: [
                       DropdownMenuItem(
                         value: 'default',
@@ -671,9 +676,9 @@ class _EditCourseState extends State<EditCourse> {
                           semesterOneGrade: semOneGrade,
                           semesterTwoGrade: semTwoGrade,
                           finalGrade: isOneSemester
-                              ? semOneGrade
+                              ? semOneGrade!
                               : Grade.values[4 -
-                                  (((4 - semOneGrade.index) +
+                                  (((4 - semOneGrade!.index) +
                                               (4 - semTwoGrade!.index)) /
                                           2)
                                       .round()]);
@@ -701,6 +706,8 @@ class _EditCourseState extends State<EditCourse> {
                         ));
                         Navigator.pop(context);
                         Navigator.pop(context);
+                        Navigator.pop(context);
+
                         widget.refresh();
                       }
                     } else {
@@ -711,7 +718,56 @@ class _EditCourseState extends State<EditCourse> {
                       ));
                     }
                   },
-                )
+                ),
+                IconButton(
+                    color: Theme.of(context).colorScheme.error,
+                    onPressed: () {
+                      showDialog(
+                          context: context,
+                          barrierDismissible: true,
+                          builder: (BuildContext context) {
+                            return CupertinoAlertDialog(
+                              title: Text("Delete this course?"),
+                              content: Text(
+                                  "Are you sure you would like to delete this course?"),
+                              actions: [
+                                CupertinoDialogAction(
+                                  onPressed: () => Navigator.pop(context),
+                                  child: Text("No"),
+                                  isDefaultAction: true,
+                                ),
+                                CupertinoDialogAction(
+                                  child: Text("Yes"),
+                                  isDestructiveAction: true,
+                                  onPressed: () async {
+                                    await supabase
+                                        .from("courses")
+                                        .delete()
+                                        .match({'id': widget.course.id});
+                                    Navigator.pop(context);
+                                    Navigator.pop(context);
+                                    Navigator.pop(context);
+                                    widget.refresh();
+                                    ScaffoldMessenger.of(context)
+                                        .showSnackBar(SnackBar(
+                                      content: const Text(
+                                          "Course successfully deleted"),
+                                    ));
+                                  },
+                                ),
+                              ],
+                            );
+                          });
+                    },
+                    icon: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Icons.delete_forever_rounded),
+                        Text("Delete Course",
+                            style: TextStyle(
+                                color: Theme.of(context).colorScheme.error))
+                      ],
+                    ))
               ],
             ),
           ),

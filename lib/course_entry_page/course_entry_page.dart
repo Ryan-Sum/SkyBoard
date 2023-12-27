@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:sky_board/course_entry_page/custom_widgets/course_entry_tile.dart';
+import 'package:sky_board/course_entry_page/custom_widgets/edit_course.dart';
 import 'package:sky_board/global_widgets/custom_app_bar.dart';
+import 'package:sky_board/main.dart';
 import 'package:sky_board/models/course.dart';
+import 'package:sky_board/models/course_type.dart';
+import 'package:sky_board/models/grade.dart';
+import 'package:sky_board/models/subject.dart';
+import 'package:uuid/uuid.dart';
+import 'package:uuid/v8.dart';
 
 class CourseEntryPage extends StatefulWidget {
   const CourseEntryPage(
@@ -68,7 +75,27 @@ class _CourseEntryPageState extends State<CourseEntryPage> {
                 ),
                 Spacer(),
                 IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => EditCourse(
+                            course: Course(
+                                id: Uuid().v8(),
+                                studentId: supabase.auth.currentUser!.id,
+                                courseName: "",
+                                courseType: null,
+                                subject: null,
+                                yearTaken: null,
+                                isOneSemester: false,
+                                semesterOneGrade: null,
+                                semesterTwoGrade: null,
+                                finalGrade: Grade.a),
+                            refresh: _refresh,
+                          ),
+                        ),
+                      );
+                    },
                     icon: Icon(
                       Icons.add,
                       color: Theme.of(context).colorScheme.secondary,
@@ -79,9 +106,16 @@ class _CourseEntryPageState extends State<CourseEntryPage> {
               shrinkWrap: true,
               itemCount: widget.courses.length,
               padding: EdgeInsets.all(16),
-              itemBuilder: (context, index) => CourseEntryTile(
-                course: widget.courses[index],
-                refresh: _refresh,
+              itemBuilder: (context, index) => Column(
+                children: [
+                  CourseEntryTile(
+                    course: widget.courses[index],
+                    refresh: _refresh,
+                  ),
+                  SizedBox(
+                    height: 16,
+                  )
+                ],
               ),
             ),
           ],
