@@ -1,12 +1,12 @@
 ![logo](images/logo_horizontal.svg ":size=500")
 
-> An easy way for parents, teachers, and students to stay connected.
+> Elevate Your Achievements, Craft Your Future
 
-- Easy to use
-- Keeps you updated
-- Streamlines education
+- Highlight Your Accomplishments
+- Be A Standout Applicant
+- Easy To Use
 
 [Documentation](documentation.md)
-[GitHub](https://github.com/Ryan-Sum/sky_chatter",)
+[GitHub](https://github.com/Ryan-Sum/SkyBoard",)
 
 ![color](#F0F0F0)

@@ -44,7 +44,7 @@ Access your SkyBoard profile from any device, anytime, anywhere. Your achievemen
 
 To run this app, you must first [install Flutter](https://docs.flutter.dev/get-started/install) and its associated packages. You must also download [Visual Studio Code](https://code.visualstudio.com/download) along with [Xcode](https://developer.apple.com/xcode/) (if on macOS) or [Android Studio](https://developer.android.com/studio). Once all programs are installed, ensure you have followed all required instructions in the [Flutter install instructions](https://docs.flutter.dev/get-started/install). Once that is completed, run the command 'flutter doctor' in the command prompt to ensure everything is ready.
 
-Once that is completed, download this repository from GitHub by clicking the green "Code" button then downloading the zip file. Extract the zip file to your desired location.
+Once that is completed, download this repository from GitHub by clicking the blue GitHub logo in the top right, then the blue "<> Code" button (download the zip file). Extract the zip file to your desired location.
 
 To prepare Visual Studio Code, install the [Dart and Flutter](https://dartcode.org) extensions for Visual Studio Code.
 
