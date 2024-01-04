@@ -27,13 +27,13 @@ class _SplashScreenState extends State<SplashScreen> {
       Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => HomePage(),
+            builder: (context) => const HomePage(),
           ));
     } else {
       Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => OnboardingPage(),
+            builder: (context) => const OnboardingPage(),
           ));
     }
   }

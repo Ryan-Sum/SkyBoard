@@ -9,6 +9,9 @@ class CustomTextInput extends StatefulWidget {
   final String hintText;
   final TextInputAction textInputAction;
   final String? Function(String?)? validator;
+  final bool? isEnabled;
+  final void Function()? onTap;
+  final int? maxLines;
 
   const CustomTextInput({
     Key? key,
@@ -19,6 +22,9 @@ class CustomTextInput extends StatefulWidget {
     required this.hintText,
     required this.textInputAction,
     this.validator,
+    this.isEnabled,
+    this.onTap,
+    this.maxLines,
   }) : super(key: key);
 
   @override
@@ -33,6 +39,9 @@ class _CustomTextInputState extends State<CustomTextInput> {
       showText = false;
     }
     return TextFormField(
+      maxLines: widget.maxLines,
+      readOnly: widget.isEnabled == null ? false : widget.isEnabled!,
+      onTap: widget.onTap,
       validator: widget.validator,
       decoration: InputDecoration(
           enabledBorder: OutlineInputBorder(
@@ -53,8 +62,8 @@ class _CustomTextInputState extends State<CustomTextInput> {
             borderRadius: const BorderRadius.all(Radius.circular(16)),
             borderSide: BorderSide(color: Theme.of(context).colorScheme.error),
           ),
-          hintText: widget.hintText,
-          hintStyle: Theme.of(context)
+          labelText: widget.hintText,
+          labelStyle: Theme.of(context)
               .textTheme
               .bodyLarge!
               .copyWith(color: Colors.black38),

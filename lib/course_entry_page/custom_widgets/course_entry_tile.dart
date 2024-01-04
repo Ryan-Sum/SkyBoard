@@ -21,7 +21,7 @@ class CourseEntryTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
@@ -40,7 +40,7 @@ class CourseEntryTile extends StatelessWidget {
           Row(
             children: [
               Text(course.courseName),
-              Spacer(),
+              const Spacer(),
               IconButton(
                   onPressed: () {
                     Navigator.push(
@@ -58,7 +58,7 @@ class CourseEntryTile extends StatelessWidget {
             ],
           ),
           Table(
-            columnWidths: {
+            columnWidths: const {
               0: FixedColumnWidth(64),
               1: FixedColumnWidth(64),
               2: FixedColumnWidth(64),
@@ -102,7 +102,7 @@ class CourseEntryTile extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                   ),
-                  TableCell(
+                  const TableCell(
                     child: Text(""),
                   ),
                   TableCell(
@@ -151,7 +151,7 @@ class CourseEntryTile extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                   ),
-                  TableCell(
+                  const TableCell(
                     child: Text(
                       "",
                     ),

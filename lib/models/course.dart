@@ -66,6 +66,7 @@ class Course {
       'is_one_semester': isOneSemester,
       'semester_one_grade': semesterOneGrade!.index,
       'semester_two_grade':
+          // ignore: prefer_null_aware_operators
           semesterTwoGrade == null ? null : semesterTwoGrade!.index,
       'final_grade': finalGrade.index,
     };

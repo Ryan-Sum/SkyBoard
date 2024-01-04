@@ -33,7 +33,7 @@ class _LoginPageState extends State<LoginPage> {
         Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (context) => HomePage(),
+              builder: (context) => const HomePage(),
             ));
       }
     });
@@ -150,7 +150,9 @@ class _LoginPageState extends State<LoginPage> {
                               );
                             }
                           } finally {
-                            Navigator.pop(context);
+                            if (mounted) {
+                              Navigator.pop(context);
+                            }
                           }
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(

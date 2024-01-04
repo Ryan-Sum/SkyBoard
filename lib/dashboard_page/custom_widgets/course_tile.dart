@@ -41,71 +41,77 @@ class CourseTile extends StatelessWidget {
             ));
       },
       child: Container(
-        decoration: BoxDecoration(boxShadow: [
-          BoxShadow(
-            color: const Color(0x00000000).withOpacity(0.09),
-            offset: const Offset(0, 0),
-            blurRadius: 19,
-            spreadRadius: 5,
-          )
-        ], color: Theme.of(context).colorScheme.surface),
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(children: [
-            Row(
-              children: [
-                Icon(
-                  Icons.school_rounded,
-                  color: Theme.of(context).colorScheme.secondary,
+        padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+        child: Container(
+          decoration: BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                  color: const Color(0x00000000).withOpacity(0.09),
+                  offset: const Offset(0, 0),
+                  blurRadius: 19,
+                  spreadRadius: 5,
                 ),
-                const SizedBox(
-                  width: 16,
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Courses",
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                    courses.length == 1
-                        ? Text("${courses.length} Course Entered")
-                        : Text("${courses.length} Courses Entered"),
-                  ],
-                ),
-                Spacer(),
-                Hero(
-                  tag: "gpa",
-                  child: SizedBox(
-                    width: 75,
-                    height: 75,
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        Text(
-                          "$gpa\nGPA",
-                          style: Theme.of(context).textTheme.bodySmall,
-                          textAlign: TextAlign.center,
-                        ),
-                        SizedBox(
-                          width: 75,
-                          height: 75,
-                          child: CircularProgressIndicator(
-                            strokeWidth: 8,
-                            value: gpa / 4,
-                            strokeCap: StrokeCap.round,
-                            color: Theme.of(context).colorScheme.secondary,
-                            backgroundColor:
-                                Theme.of(context).colorScheme.surfaceVariant,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                )
               ],
-            ),
-          ]),
+              color: Theme.of(context).colorScheme.surface,
+              borderRadius: BorderRadius.circular(16)),
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(children: [
+              Row(
+                children: [
+                  Icon(
+                    Icons.school_rounded,
+                    color: Theme.of(context).colorScheme.secondary,
+                  ),
+                  const SizedBox(
+                    width: 16,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Courses",
+                        style: Theme.of(context).textTheme.titleMedium,
+                      ),
+                      courses.length == 1
+                          ? Text("${courses.length} Course Entered")
+                          : Text("${courses.length} Courses Entered"),
+                    ],
+                  ),
+                  const Spacer(),
+                  Hero(
+                    tag: "gpa",
+                    child: SizedBox(
+                      width: 75,
+                      height: 75,
+                      child: Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          Text(
+                            "${gpa.toStringAsPrecision(2)}\nGPA",
+                            style: Theme.of(context).textTheme.bodySmall,
+                            textAlign: TextAlign.center,
+                          ),
+                          SizedBox(
+                            width: 75,
+                            height: 75,
+                            child: CircularProgressIndicator(
+                              strokeWidth: 8,
+                              value: gpa / 4,
+                              strokeCap: StrokeCap.round,
+                              color: Theme.of(context).colorScheme.secondary,
+                              backgroundColor:
+                                  Theme.of(context).colorScheme.surfaceVariant,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ]),
+          ),
         ),
       ),
     );

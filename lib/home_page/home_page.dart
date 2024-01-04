@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sky_board/account_page/account_page.dart';
 import 'package:sky_board/calendar_page/calendar_page.dart';
-import 'package:sky_board/community_page/community_page.dart';
 import 'package:sky_board/dashboard_page/dashboard_page.dart';
-import 'package:sky_board/map_page/map_page.dart';
+import 'package:sky_board/print_page/print_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -13,12 +12,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _index = 0;
+  int _index = 2;
   List<Widget> pages = [
     const DashboardPage(),
     const CalendarPage(),
-    const CommunityPage(),
-    const MapPage(),
+    const PrintPage(),
     const AccountPage()
   ];
   @override
@@ -44,12 +42,8 @@ class _HomePageState extends State<HomePage> {
             label: "Calendar",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.school_rounded),
-            label: "Community",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.map_rounded),
-            label: "Map",
+            icon: Icon(Icons.print_rounded),
+            label: "Print",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person_rounded),

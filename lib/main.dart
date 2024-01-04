@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sky_board/splash_screen/splash_screen.dart';
+import 'package:sky_board/themes/dark_theme.dart';
 import 'package:sky_board/themes/light_theme.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -25,7 +26,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'SkyBoard',
       theme: LightTheme().lightTheme(context),
-      home: SplashScreen(),
+      darkTheme: DarkTheme().darkTheme(context),
+      home: const SplashScreen(),
     );
   }
 }

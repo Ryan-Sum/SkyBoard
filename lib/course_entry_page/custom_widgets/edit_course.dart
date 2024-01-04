@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:sky_board/dashboard_page/dashboard_page.dart';
 import 'package:sky_board/global_widgets/cta_button.dart';
 import 'package:sky_board/global_widgets/custom_app_bar.dart';
 import 'package:sky_board/global_widgets/custom_text_input.dart';
@@ -10,7 +9,6 @@ import 'package:sky_board/models/course_type.dart';
 import 'package:sky_board/models/grade.dart';
 import 'package:sky_board/models/subject.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:uuid/uuid.dart';
 
 class EditCourse extends StatefulWidget {
   const EditCourse({super.key, required this.course, required this.refresh});
@@ -24,12 +22,12 @@ class EditCourse extends StatefulWidget {
 
 class _EditCourseState extends State<EditCourse> {
   late final TextEditingController courseNameController;
-  CourseType? courseType = null;
+  CourseType? courseType;
   Subject? subject = Subject.other;
-  DateTime? yearTaken = null;
+  DateTime? yearTaken;
   bool isOneSemester = false;
-  Grade? semOneGrade = null;
-  Grade? semTwoGrade = null;
+  Grade? semOneGrade;
+  Grade? semTwoGrade;
   late final GlobalKey<FormState> formKey;
   @override
   void initState() {
@@ -54,7 +52,7 @@ class _EditCourseState extends State<EditCourse> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(),
+      appBar: const CustomAppBar(),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -76,7 +74,7 @@ class _EditCourseState extends State<EditCourse> {
                     return null;
                   },
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 16,
                 ),
                 DropdownButtonFormField(
@@ -104,52 +102,52 @@ class _EditCourseState extends State<EditCourse> {
                             'Math'),
                       ),
                       DropdownMenuItem(
+                        value: 'science',
                         child: Text(
                             style: Theme.of(context).textTheme.bodyLarge,
                             'Science'),
-                        value: 'science',
                       ),
                       DropdownMenuItem(
+                        value: 'english',
                         child: Text(
                             style: Theme.of(context).textTheme.bodyLarge,
                             'English'),
-                        value: 'english',
                       ),
                       DropdownMenuItem(
+                        value: 'history',
                         child: Text(
                             style: Theme.of(context).textTheme.bodyLarge,
                             'History'),
-                        value: 'history',
                       ),
                       DropdownMenuItem(
+                        value: 'language',
                         child: Text(
                             style: Theme.of(context).textTheme.bodyLarge,
                             'Language'),
-                        value: 'language',
                       ),
                       DropdownMenuItem(
+                        value: 'arts',
                         child: Text(
                             style: Theme.of(context).textTheme.bodyLarge,
                             'Arts'),
-                        value: 'arts',
                       ),
                       DropdownMenuItem(
+                        value: 'finances',
                         child: Text(
                             style: Theme.of(context).textTheme.bodyLarge,
                             'Finances'),
-                        value: 'finances',
                       ),
                       DropdownMenuItem(
+                        value: 'cte',
                         child: Text(
                             style: Theme.of(context).textTheme.bodyLarge,
                             'CTE'),
-                        value: 'cte',
                       ),
                       DropdownMenuItem(
+                        value: 'other',
                         child: Text(
                             style: Theme.of(context).textTheme.bodyLarge,
                             'Other'),
-                        value: 'other',
                       ),
                     ],
                     decoration: InputDecoration(
@@ -221,7 +219,7 @@ class _EditCourseState extends State<EditCourse> {
                         });
                       }
                     }),
-                SizedBox(
+                const SizedBox(
                   height: 16,
                 ),
                 DropdownButtonFormField(
@@ -249,32 +247,32 @@ class _EditCourseState extends State<EditCourse> {
                             'Regular'),
                       ),
                       DropdownMenuItem(
+                        value: 'honors',
                         child: Text(
                             style: Theme.of(context).textTheme.bodyLarge,
                             'Honors'),
-                        value: 'honors',
                       ),
                       DropdownMenuItem(
+                        value: 'aice',
                         child: Text(
                             style: Theme.of(context).textTheme.bodyLarge,
                             'AICE'),
-                        value: 'aice',
                       ),
                       DropdownMenuItem(
+                        value: 'dual',
                         child: Text(
                             style: Theme.of(context).textTheme.bodyLarge,
                             'Dual'),
-                        value: 'dual',
                       ),
                       DropdownMenuItem(
+                        value: 'ap',
                         child: Text(
                             style: Theme.of(context).textTheme.bodyLarge, 'AP'),
-                        value: 'ap',
                       ),
                       DropdownMenuItem(
+                        value: 'ib',
                         child: Text(
                             style: Theme.of(context).textTheme.bodyLarge, 'IB'),
-                        value: 'ib',
                       ),
                     ],
                     decoration: InputDecoration(
@@ -334,7 +332,7 @@ class _EditCourseState extends State<EditCourse> {
                         });
                       }
                     }),
-                SizedBox(
+                const SizedBox(
                   height: 16,
                 ),
                 DropdownButtonFormField(
@@ -358,28 +356,28 @@ class _EditCourseState extends State<EditCourse> {
                             'Year Taken'),
                       ),
                       DropdownMenuItem(
-                        value: '2020-2021',
+                        value: '2020',
                         child: Text(
                             style: Theme.of(context).textTheme.bodyLarge,
-                            '2020'),
+                            '2020-2021'),
                       ),
                       DropdownMenuItem(
+                        value: '2021',
                         child: Text(
                             style: Theme.of(context).textTheme.bodyLarge,
                             '2021-2022'),
-                        value: '2021',
                       ),
                       DropdownMenuItem(
+                        value: '2022',
                         child: Text(
                             style: Theme.of(context).textTheme.bodyLarge,
                             '2022-2023'),
-                        value: '2022',
                       ),
                       DropdownMenuItem(
+                        value: '2023',
                         child: Text(
                             style: Theme.of(context).textTheme.bodyLarge,
                             '2023-2024'),
-                        value: '2023',
                       ),
                     ],
                     decoration: InputDecoration(
@@ -431,23 +429,24 @@ class _EditCourseState extends State<EditCourse> {
                         });
                       }
                     }),
-                SizedBox(
+                const SizedBox(
                   height: 16,
                 ),
                 Row(
                   children: [
-                    Text("Is One Semester (True/False):"),
-                    Spacer(),
+                    const Text("Is One Semester (True/False):"),
+                    const Spacer(),
                     Switch.adaptive(
-                        value: isOneSemester == null ? false : isOneSemester!,
+                        value: isOneSemester,
                         onChanged: (x) {
                           setState(() {
                             isOneSemester = x;
+                            semTwoGrade = null;
                           });
                         })
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 16,
                 ),
                 DropdownButtonFormField(
@@ -474,24 +473,24 @@ class _EditCourseState extends State<EditCourse> {
                             style: Theme.of(context).textTheme.bodyLarge, 'A'),
                       ),
                       DropdownMenuItem(
+                        value: 'b',
                         child: Text(
                             style: Theme.of(context).textTheme.bodyLarge, 'B'),
-                        value: 'b',
                       ),
                       DropdownMenuItem(
+                        value: 'c',
                         child: Text(
                             style: Theme.of(context).textTheme.bodyLarge, 'C'),
-                        value: 'c',
                       ),
                       DropdownMenuItem(
+                        value: 'd',
                         child: Text(
                             style: Theme.of(context).textTheme.bodyLarge, 'D'),
-                        value: 'd',
                       ),
                       DropdownMenuItem(
+                        value: 'f',
                         child: Text(
                             style: Theme.of(context).textTheme.bodyLarge, 'F'),
-                        value: 'f',
                       ),
                     ],
                     decoration: InputDecoration(
@@ -547,11 +546,14 @@ class _EditCourseState extends State<EditCourse> {
                         });
                       }
                     }),
-                SizedBox(
+                const SizedBox(
                   height: 16,
                 ),
                 DropdownButtonFormField(
                     validator: (value) {
+                      if (isOneSemester == true) {
+                        return null;
+                      }
                       if (value == "default") {
                         return "Please Select a Value";
                       }
@@ -576,24 +578,24 @@ class _EditCourseState extends State<EditCourse> {
                             style: Theme.of(context).textTheme.bodyLarge, 'A'),
                       ),
                       DropdownMenuItem(
+                        value: 'b',
                         child: Text(
                             style: Theme.of(context).textTheme.bodyLarge, 'B'),
-                        value: 'b',
                       ),
                       DropdownMenuItem(
+                        value: 'c',
                         child: Text(
                             style: Theme.of(context).textTheme.bodyLarge, 'C'),
-                        value: 'c',
                       ),
                       DropdownMenuItem(
+                        value: 'd',
                         child: Text(
                             style: Theme.of(context).textTheme.bodyLarge, 'D'),
-                        value: 'd',
                       ),
                       DropdownMenuItem(
+                        value: 'f',
                         child: Text(
                             style: Theme.of(context).textTheme.bodyLarge, 'F'),
-                        value: 'f',
                       ),
                     ],
                     decoration: InputDecoration(
@@ -651,7 +653,7 @@ class _EditCourseState extends State<EditCourse> {
                               });
                             }
                           }),
-                Spacer(),
+                const Spacer(),
                 CTAButton(
                   text: "Save",
                   onTap: () async {
@@ -693,20 +695,26 @@ class _EditCourseState extends State<EditCourse> {
                             });
                         await supabase.from("courses").upsert(course.toMap());
                       } on Error {
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          content: const Text(
-                              "An error occurred. Please try again later."),
-                          backgroundColor: Theme.of(context).colorScheme.error,
-                        ));
+                        if (mounted) {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: const Text(
+                                "An error occurred. Please try again later."),
+                            backgroundColor:
+                                Theme.of(context).colorScheme.error,
+                          ));
+                        }
                       } finally {
-                        Navigator.pop(context);
+                        if (mounted) {
+                          Navigator.pop(context);
 
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          content: const Text("Course successfully updated"),
-                        ));
-                        Navigator.pop(context);
-                        Navigator.pop(context);
-                        Navigator.pop(context);
+                          ScaffoldMessenger.of(context)
+                              .showSnackBar(const SnackBar(
+                            content: Text("Course successfully updated"),
+                          ));
+                          Navigator.pop(context);
+                          Navigator.pop(context);
+                          Navigator.pop(context);
+                        }
 
                         widget.refresh();
                       }
@@ -727,33 +735,35 @@ class _EditCourseState extends State<EditCourse> {
                           barrierDismissible: true,
                           builder: (BuildContext context) {
                             return CupertinoAlertDialog(
-                              title: Text("Delete this course?"),
-                              content: Text(
+                              title: const Text("Delete this course?"),
+                              content: const Text(
                                   "Are you sure you would like to delete this course?"),
                               actions: [
                                 CupertinoDialogAction(
                                   onPressed: () => Navigator.pop(context),
-                                  child: Text("No"),
                                   isDefaultAction: true,
+                                  child: const Text("No"),
                                 ),
                                 CupertinoDialogAction(
-                                  child: Text("Yes"),
                                   isDestructiveAction: true,
                                   onPressed: () async {
                                     await supabase
                                         .from("courses")
                                         .delete()
                                         .match({'id': widget.course.id});
-                                    Navigator.pop(context);
-                                    Navigator.pop(context);
-                                    Navigator.pop(context);
-                                    widget.refresh();
-                                    ScaffoldMessenger.of(context)
-                                        .showSnackBar(SnackBar(
-                                      content: const Text(
-                                          "Course successfully deleted"),
-                                    ));
+                                    if (mounted) {
+                                      Navigator.pop(context);
+                                      Navigator.pop(context);
+                                      Navigator.pop(context);
+                                      widget.refresh();
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(const SnackBar(
+                                        content:
+                                            Text("Course successfully deleted"),
+                                      ));
+                                    }
                                   },
+                                  child: const Text("Yes"),
                                 ),
                               ],
                             );
@@ -762,7 +772,7 @@ class _EditCourseState extends State<EditCourse> {
                     icon: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(Icons.delete_forever_rounded),
+                        const Icon(Icons.delete_forever_rounded),
                         Text("Delete Course",
                             style: TextStyle(
                                 color: Theme.of(context).colorScheme.error))

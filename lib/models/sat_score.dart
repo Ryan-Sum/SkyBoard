@@ -34,7 +34,7 @@ class SATScore {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
-      'student_td': studentId,
+      'student_id': studentId,
       'math': math,
       'english': english,
       'date_taken': dateTaken.toString(),

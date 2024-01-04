@@ -4,6 +4,9 @@
 
 list(APPEND FLUTTER_PLUGIN_LIST
   app_links
+  open_document
+  share_plus
+  smart_auth
   url_launcher_windows
 )
 
