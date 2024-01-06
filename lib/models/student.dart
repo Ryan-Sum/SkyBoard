@@ -42,7 +42,7 @@ class Student {
       'school_id': schoolId,
       'first_name': firstName,
       'last_name': lastName,
-      'graduation_year': graduationYear.millisecondsSinceEpoch,
+      'graduation_year': graduationYear.toString(),
       'personal_summary': personalSummary,
     };
   }

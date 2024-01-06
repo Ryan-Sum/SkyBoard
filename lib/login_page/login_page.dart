@@ -1,6 +1,9 @@
 import 'dart:async';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:sky_board/forgot_password/forgot_password.dart';
 import 'package:sky_board/global_widgets/cta_button.dart';
 import 'package:sky_board/global_widgets/custom_app_bar.dart';
 import 'package:sky_board/global_widgets/custom_text_input.dart';
@@ -101,11 +104,20 @@ class _LoginPageState extends State<LoginPage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        Text("Forgot Password?",
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodySmall!
-                                .copyWith(color: Colors.grey[350])),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ForgotPassword(),
+                                ));
+                          },
+                          child: Text("Forgot Password?",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodySmall!
+                                  .copyWith(color: Colors.grey[350])),
+                        ),
                       ],
                     ),
                     const SizedBox(
@@ -182,15 +194,18 @@ class _LoginPageState extends State<LoginPage> {
                                       .textTheme
                                       .bodySmall!
                                       .copyWith(color: Colors.grey[500])),
-                              Text(
-                                "Sign up here",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodySmall!
-                                    .copyWith(
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .primary),
+                              GestureDetector(
+                                onTap: () => Navigator.pop(context),
+                                child: Text(
+                                  "Sign up here",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodySmall!
+                                      .copyWith(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .primary),
+                                ),
                               ),
                             ],
                           ),
@@ -201,7 +216,7 @@ class _LoginPageState extends State<LoginPage> {
                           color: Colors.grey[400],
                         )),
                       ],
-                    )
+                    ),
                   ],
                 ),
               ),

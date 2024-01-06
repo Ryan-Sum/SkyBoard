@@ -24,7 +24,7 @@ class CustomTextInput extends StatefulWidget {
     this.validator,
     this.isEnabled,
     this.onTap,
-    this.maxLines,
+    this.maxLines = 1,
   }) : super(key: key);
 
   @override

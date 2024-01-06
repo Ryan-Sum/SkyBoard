@@ -39,6 +39,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
     const OnboardingPage2(),
     const OnboardingPage3()
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

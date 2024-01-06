@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:sky_board/login_page/login_page.dart';
+import 'package:sky_board/sign_up/sign_up.dart';
 
 class OnboardingPage3 extends StatelessWidget {
   const OnboardingPage3({super.key});
@@ -38,7 +39,15 @@ class OnboardingPage3 extends StatelessWidget {
             Expanded(
               flex: 6,
               child: Column(children: [
-                ElevatedButton(onPressed: () {}, child: const Text("Sign Up")),
+                ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SignUp(),
+                          ));
+                    },
+                    child: const Text("Sign Up")),
                 const SizedBox(
                   height: 16,
                 ),

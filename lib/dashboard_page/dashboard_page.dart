@@ -1,5 +1,6 @@
 import 'package:animate_gradient/animate_gradient.dart';
 import 'package:flutter/material.dart';
+import 'package:pinput/pinput.dart';
 import 'package:sky_board/dashboard_page/custom_widgets/course_tile.dart';
 import 'package:sky_board/dashboard_page/custom_widgets/service_hour_tile.dart';
 import 'package:sky_board/dashboard_page/custom_widgets/test_score_tile.dart';
@@ -33,7 +34,7 @@ class _DashboardPageState extends State<DashboardPage> {
 
   late double gpa = 0;
   late double totalHours = 0;
-  late List<Widget> tiles;
+  late List<Widget> tiles = [];
 
   @override
   Widget build(BuildContext context) {
@@ -176,7 +177,9 @@ class _DashboardPageState extends State<DashboardPage> {
       total += (4 - element.finalGrade.index);
     }
     gpa = total / _courses.length;
-
+    if (_courses.length == 0) {
+      gpa = 0;
+    }
     tiles = [
       CourseTile(
         key: GlobalKey(),
@@ -215,7 +218,11 @@ class _DashboardPageState extends State<DashboardPage> {
     _communityService = [];
     _courses = [];
     gpa = 0;
-
+    if (_courses.length == 0) {
+      setState(() {
+        gpa = 0;
+      });
+    }
     setState(() {
       _satScores = [];
     });

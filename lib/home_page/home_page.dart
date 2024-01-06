@@ -3,6 +3,7 @@ import 'package:sky_board/account_page/account_page.dart';
 import 'package:sky_board/calendar_page/calendar_page.dart';
 import 'package:sky_board/dashboard_page/dashboard_page.dart';
 import 'package:sky_board/print_page/print_page.dart';
+import 'package:sky_board/social_media/social_media.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -12,12 +13,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _index = 2;
+  int _index = 0;
   List<Widget> pages = [
     const DashboardPage(),
     const CalendarPage(),
     const PrintPage(),
-    const AccountPage()
+    const SocialMedia(),
+    const AccountPage(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -44,6 +46,10 @@ class _HomePageState extends State<HomePage> {
           BottomNavigationBarItem(
             icon: Icon(Icons.print_rounded),
             label: "Print",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.share_rounded),
+            label: "Social Media",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person_rounded),

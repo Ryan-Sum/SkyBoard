@@ -1,30 +1,29 @@
 # Packages Used From: [pub.dev](https://pub.dev)
 
-[Pub.dev](https://pub.dev) is an online library for packages and resources to use with Dart. All packages used in this project are considered free to use under their respective licenses.
+[Pub.dev](https://pub.dev) is an online library for packages and resources to use with Dart. All packages used in this project are considered free to use under their respective licenses. To view each package anf its respective license, go to [pub.dev](https://pub.dev) and search for the package.
 
-- flutter: sdk: flutter - License for Flutter Engine: [Apache License
-  Version 2.0](https://raw.githubusercontent.com/flutter/engine/master/sky/packages/sky_engine/LICENSE)
-- License for Dart Framework: [BSD 3-Clause "New" or "Revised" License](https://github.com/flutter/flutter/blob/master/LICENSE)
-- cupertino_icons: ^1.0.2: [MIT License](https://pub.dev/packages/cupertino_icons/license)
-- firebase_core: ^2.10.0: [BSD-3-Clause](https://pub.dev/packages/firebase_core/license)
-- url_launcher: ^6.1.11: [BSD-3-Clause](https://pub.dev/packages/url_launcher/license)
-- cloud_firestore: ^4.5.3: [BSD-3-Clause](https://pub.dev/packages/cloud_firestore/license)
-- firebase_auth: ^4.1.3: [BSD-3-Clause](https://pub.dev/packages/firebase_auth/license)
-- firebase_storage: ^11.1.1: [BSD-3-Clause](https://pub.dev/packages/firebase_storage/license)
-- table_calendar: ^3.0.9: [Apache-2.0](https://pub.dev/packages/table_calendar/license)
-- intl: ^0.18.1: [BSD-3-Clause](https://pub.dev/packages/intl/license)
-- webview_flutter: ^4.2.0: [BSD-3-Clause](https://pub.dev/packages/webview_flutter/license)
-- uuid: ^3.0.7: [MIT License](https://pub.dev/packages/uuid/license)
-- image_picker: ^0.8.7: [Apache-2.0, BSD-3-Clause](https://pub.dev/packages/image_picker/license)
-- flutter_riverpod: ^2.3.6: [MIT License](https://pub.dev/packages/flutter_riverpod/license)
-- flutter_svg: ^2.0.5: [MIT License](https://pub.dev/packages/flutter_svg/license)
-- google_fonts: ^4.0.3: [Apache-2.0](https://pub.dev/packages/google_fonts/license)
-- smooth_page_indicator: ^1.1.0: [MIT License](https://pub.dev/packages/smooth_page_indicator/license)
-- riverpod: ^2.3.6: [MIT License](https://pub.dev/packages/riverpod/license)
-- image_cropper: ^4.0.1: [BSD-3-Clause](https://pub.dev/packages/image_cropper/license)
-
-# Images Used Most From: [creativecommons.org](creativecommons.org)
-
-- "[Band Camp 2014 2](https://www.flickr.com/photos/44082489@N00/14953689985)" by [H. Michael Miley](https://www.flickr.com/photos/44082489@N00) is licensed under [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/?ref=openverse).
-- "[Packed school parking lot](https://www.flickr.com/photos/81535032@N00/9886286484)" by [tl8745a](https://www.flickr.com/photos/81535032@N00) is licensed under [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/?ref=openverse).
-- "[Millennium FBLA Nationals Winners](https://commons.wikimedia.org/w/index.php?curid=80895895)" by [SKYMENSAGA](https://commons.wikimedia.org/w/index.php?title=User:SKYMENSAGA&action=edit&redlink=1) is licensed under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/?ref=openverse).
+- cupertino_icons: ^1.0.2
+- supabase_flutter: ^1.10.22
+- flutter_svg: ^2.0.9
+- google_fonts: ^6.1.0
+- smooth_page_indicator: ^1.1.0
+- uuid: ^4.2.1
+- flutter_riverpod: ^2.4.9
+- riverpod_annotation: ^2.3.3
+- hooks_riverpod: ^2.4.9
+- flutter_hooks: ^0.20.3
+- riverpod_generator: ^2.3.9
+- build_runner: ^2.4.7
+- freezed: ^2.4.6
+- json_serializable: ^6.7.1
+- freezed_annotation: ^2.4.1
+- animate_gradient: ^0.0.2+1
+- pinput: ^3.0.1
+- intl: ^0.18.0
+- table_calendar: ^3.0.9
+- icalendar_parser: ^2.0.0
+- pdf: ^3.10.7
+- path_provider: ^2.1.1
+- open_document: ^1.0.7
+- url_launcher: ^6.2.2
+- webview_flutter: ^4.4.3
