@@ -429,7 +429,7 @@ class _EditTestsState extends State<EditTests> {
                                   .upsert(score.toMap());
                             }
                           } on Error {
-                            if (mounted) {
+                            if (context.mounted) {
                               ScaffoldMessenger.of(context)
                                   .showSnackBar(SnackBar(
                                 content: const Text(
@@ -439,7 +439,7 @@ class _EditTestsState extends State<EditTests> {
                               ));
                             }
                           } finally {
-                            if (mounted) {
+                            if (context.mounted) {
                               Navigator.pop(context);
 
                               ScaffoldMessenger.of(context)
@@ -493,7 +493,7 @@ class _EditTestsState extends State<EditTests> {
                                             .match({'id': widget.satScore!.id});
                                       }
 
-                                      if (mounted) {
+                                      if (context.mounted) {
                                         Navigator.pop(context);
                                         Navigator.pop(context);
                                         Navigator.pop(context);

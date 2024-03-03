@@ -69,7 +69,7 @@ class _CalendarState extends State<Calendar> {
             headerTitleBuilder: (context, day) {
               return Row(
                 children: [
-                  Spacer(
+                  const Spacer(
                     flex: 2,
                   ),
                   Text(
@@ -77,7 +77,7 @@ class _CalendarState extends State<Calendar> {
                     style: Theme.of(context).textTheme.bodyLarge,
                     textAlign: TextAlign.center,
                   ),
-                  Spacer(),
+                  const Spacer(),
                   IconButton(
                       onPressed: () {
                         Navigator.push(context, MaterialPageRoute(
@@ -89,7 +89,7 @@ class _CalendarState extends State<Calendar> {
                           },
                         ));
                       },
-                      icon: Icon(Icons.add)),
+                      icon: const Icon(Icons.add)),
                 ],
               );
             },
@@ -149,19 +149,18 @@ class _CalendarState extends State<Calendar> {
           lastDay: _lastDay,
           selectedDayPredicate: _selectedDayPredicate,
           onDaySelected: _onDaySelected,
-          headerStyle: HeaderStyle(
+          headerStyle: const HeaderStyle(
             formatButtonVisible: false,
             titleCentered: true,
           ),
         ),
-        Divider(),
+        const Divider(),
         _selectedEvents.isEmpty && _selectedUserEvents.isEmpty
-            ? Text("No Events Selected")
+            ? const Text("No Events Selected")
             : ListView.builder(
                 shrinkWrap: true,
                 itemCount: _selectedEvents.length + _selectedUserEvents.length,
                 itemBuilder: (context, index) {
-                  print("$index ${_selectedEvents.length}");
                   return index < _selectedEvents.length
                       ? Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -200,8 +199,8 @@ class _CalendarState extends State<Calendar> {
                                       _selectedEvents[index].summary,
                                       textAlign: TextAlign.left,
                                     ),
-                                    Spacer(),
-                                    Icon(
+                                    const Spacer(),
+                                    const Icon(
                                       Icons.arrow_forward_ios_rounded,
                                       size: 16,
                                     )
@@ -209,7 +208,7 @@ class _CalendarState extends State<Calendar> {
                                 ),
                               ),
                             ),
-                            Divider()
+                            const Divider()
                           ],
                         )
                       : Column(
@@ -254,8 +253,8 @@ class _CalendarState extends State<Calendar> {
                                           .summary,
                                       textAlign: TextAlign.left,
                                     ),
-                                    Spacer(),
-                                    Icon(
+                                    const Spacer(),
+                                    const Icon(
                                       Icons.arrow_forward_ios_rounded,
                                       size: 16,
                                     )
@@ -263,7 +262,7 @@ class _CalendarState extends State<Calendar> {
                                 ),
                               ),
                             ),
-                            Divider()
+                            const Divider()
                           ],
                         );
                 },
@@ -286,15 +285,15 @@ Widget buildSheet(BuildContext context, Event data) {
           children: [
             Row(
               children: [
-                Spacer(),
+                const Spacer(),
                 Column(
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       height: 16,
                     ),
                     Container(
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(
+                        borderRadius: const BorderRadius.all(
                           Radius.circular(16),
                         ),
                         color: Theme.of(context).colorScheme.outline,
@@ -304,7 +303,7 @@ Widget buildSheet(BuildContext context, Event data) {
                     ),
                   ],
                 ),
-                Spacer(),
+                const Spacer(),
               ],
             ),
             Text(
@@ -312,7 +311,7 @@ Widget buildSheet(BuildContext context, Event data) {
               style: Theme.of(context).textTheme.titleMedium,
             ),
             Text(
-                '${DateFormat('EEEE, MMM d, yyyy @').add_jm().format(data.dtstart)}\n${data.location == null ? "No Location" : data.location}'),
+                '${DateFormat('EEEE, MMM d, yyyy @').add_jm().format(data.dtstart)}\n${data.location ?? "No Location"}'),
             Padding(
               padding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
               child: Text(
@@ -341,15 +340,15 @@ Widget buildUserSheet(
           children: [
             Row(
               children: [
-                Spacer(),
+                const Spacer(),
                 Column(
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       height: 16,
                     ),
                     Container(
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(
+                        borderRadius: const BorderRadius.all(
                           Radius.circular(16),
                         ),
                         color: Theme.of(context).colorScheme.outline,
@@ -359,7 +358,7 @@ Widget buildUserSheet(
                     ),
                   ],
                 ),
-                Spacer(),
+                const Spacer(),
               ],
             ),
             Text(
@@ -369,8 +368,8 @@ Widget buildUserSheet(
             Row(
               children: [
                 Text(
-                    '${DateFormat('EEEE, MMM d, yyyy @').add_jm().format(data.dtstart)}\n${data.location == null ? "No Location" : data.location}'),
-                Spacer(),
+                    '${DateFormat('EEEE, MMM d, yyyy @').add_jm().format(data.dtstart)}\n${data.location ?? "No Location"}'),
+                const Spacer(),
                 IconButton(
                     onPressed: () {
                       Navigator.push(context, MaterialPageRoute(
@@ -383,7 +382,7 @@ Widget buildUserSheet(
                         },
                       ));
                     },
-                    icon: Icon(Icons.edit))
+                    icon: const Icon(Icons.edit))
               ],
             ),
             Padding(

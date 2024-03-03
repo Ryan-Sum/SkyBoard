@@ -76,7 +76,7 @@ class _AddUserEventState extends State<AddUserEvent> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(),
+      appBar: const CustomAppBar(),
       body: SafeArea(
         child: Form(
           key: formKey,
@@ -88,7 +88,7 @@ class _AddUserEventState extends State<AddUserEvent> {
                   controller: summary,
                   obscureText: false,
                   keyboardType: TextInputType.text,
-                  autofillHints: [],
+                  autofillHints: const [],
                   hintText: "Title",
                   textInputAction: TextInputAction.next,
                   validator: (p0) {
@@ -99,27 +99,27 @@ class _AddUserEventState extends State<AddUserEvent> {
                     }
                   },
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 16,
                 ),
                 CustomTextInput(
                     controller: description,
                     obscureText: false,
                     keyboardType: TextInputType.text,
-                    autofillHints: [],
+                    autofillHints: const [],
                     hintText: "Description (Optional)",
                     textInputAction: TextInputAction.next),
-                SizedBox(
+                const SizedBox(
                   height: 16,
                 ),
                 CustomTextInput(
                     controller: location,
                     obscureText: false,
                     keyboardType: TextInputType.streetAddress,
-                    autofillHints: [AutofillHints.postalAddress],
+                    autofillHints: const [AutofillHints.postalAddress],
                     hintText: "Location (Optional)",
                     textInputAction: TextInputAction.next),
-                SizedBox(
+                const SizedBox(
                   height: 16,
                 ),
                 CustomTextInput(
@@ -136,7 +136,7 @@ class _AddUserEventState extends State<AddUserEvent> {
                     }
 
                     dateController.setText(
-                        "${selectedDate!.month}/${selectedDate!.day}/${selectedDate!.year}");
+                        "${selectedDate.month}/${selectedDate.day}/${selectedDate.year}");
                   },
                   validator: (p0) {
                     if (p0 != null) {
@@ -154,7 +154,7 @@ class _AddUserEventState extends State<AddUserEvent> {
                   hintText: "Date of event",
                   textInputAction: TextInputAction.next,
                 ),
-                Spacer(),
+                const Spacer(),
                 CTAButton(
                   text: "Submit",
                   onTap: () async {
@@ -176,11 +176,11 @@ class _AddUserEventState extends State<AddUserEvent> {
                             location: location.text.trim(),
                             studentId: supabase.auth.currentUser!.id,
                             id: widget.userEvent == null
-                                ? Uuid().v4()
+                                ? const Uuid().v4()
                                 : widget.userEvent!.id);
                         await supabase.from("event").upsert(event.toMap());
                       } on Error {
-                        if (mounted) {
+                        if (context.mounted) {
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                             content: const Text(
                                 "An error occurred. Please try again later."),
@@ -189,7 +189,7 @@ class _AddUserEventState extends State<AddUserEvent> {
                           ));
                         }
                       } finally {
-                        if (mounted) {
+                        if (context.mounted) {
                           Navigator.pop(context);
 
                           ScaffoldMessenger.of(context)
@@ -237,7 +237,7 @@ class _AddUserEventState extends State<AddUserEvent> {
                                           .match({'id': widget.userEvent!.id});
                                     }
 
-                                    if (mounted) {
+                                    if (context.mounted) {
                                       Navigator.pop(context);
                                       Navigator.pop(context);
                                       Navigator.pop(context);

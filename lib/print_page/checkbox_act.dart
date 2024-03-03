@@ -39,7 +39,7 @@ class _CheckboxACTState extends State<CheckboxACT> {
                   }),
               Text(
                   "${DateFormat('MMMM yyyy').format(widget.act.dateTaken)} ACT"),
-              Spacer(),
+              const Spacer(),
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Text(
@@ -47,7 +47,7 @@ class _CheckboxACTState extends State<CheckboxACT> {
               ),
             ],
           ),
-          Divider()
+          const Divider()
         ],
       ),
     );

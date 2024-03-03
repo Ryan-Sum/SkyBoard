@@ -1,19 +1,18 @@
-import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:animate_gradient/animate_gradient.dart';
 import 'package:flutter/material.dart';
-import 'package:open_document/open_document.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:sky_board/main.dart';
 import 'package:sky_board/models/act_score.dart';
 import 'package:sky_board/models/community_service.dart';
 import 'package:sky_board/models/course.dart';
+import 'package:sky_board/models/custom_item.dart';
 import 'package:sky_board/models/sat_score.dart';
 import 'package:sky_board/models/student.dart';
 import 'package:sky_board/print_page/checkbox.dart';
 import 'package:sky_board/print_page/checkbox_act.dart';
 import 'package:sky_board/print_page/checkbox_community_service.dart';
+import 'package:sky_board/print_page/checkbox_custom_item.dart';
 import 'package:sky_board/print_page/checkbox_sat.dart';
 import 'package:sky_board/print_page/pdf_service.dart';
 import 'package:uuid/uuid.dart';
@@ -38,6 +37,7 @@ class _PrintPageState extends State<PrintPage> {
   late List<CommunityService> _communityService = [];
   late List<ACTScore> _actScores = [];
   late List<SATScore> _satScores = [];
+  late List<CustomItem> _customItems = [];
 
   late double gpa = 0;
   late double totalHours = 0;
@@ -46,6 +46,7 @@ class _PrintPageState extends State<PrintPage> {
   List<ACTScore> sendACT = [];
   List<SATScore> sendSAT = [];
   List<CommunityService> sendService = [];
+  List<CustomItem> sendItems = [];
 
   @override
   Widget build(BuildContext context) {
@@ -123,7 +124,7 @@ class _PrintPageState extends State<PrintPage> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                SizedBox(
+                                const SizedBox(
                                   height: 16,
                                 ),
                                 Padding(
@@ -134,7 +135,7 @@ class _PrintPageState extends State<PrintPage> {
                                         Theme.of(context).textTheme.bodyLarge,
                                   ),
                                 ),
-                                Divider()
+                                const Divider()
                               ],
                             ),
                           ),
@@ -159,7 +160,7 @@ class _PrintPageState extends State<PrintPage> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                SizedBox(
+                                const SizedBox(
                                   height: 16,
                                 ),
                                 Padding(
@@ -170,7 +171,7 @@ class _PrintPageState extends State<PrintPage> {
                                         Theme.of(context).textTheme.bodyLarge,
                                   ),
                                 ),
-                                Divider()
+                                const Divider()
                               ],
                             ),
                           ),
@@ -195,7 +196,7 @@ class _PrintPageState extends State<PrintPage> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                SizedBox(
+                                const SizedBox(
                                   height: 16,
                                 ),
                                 Padding(
@@ -206,7 +207,7 @@ class _PrintPageState extends State<PrintPage> {
                                         Theme.of(context).textTheme.bodyLarge,
                                   ),
                                 ),
-                                Divider()
+                                const Divider()
                               ],
                             ),
                           ),
@@ -231,7 +232,7 @@ class _PrintPageState extends State<PrintPage> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                SizedBox(
+                                const SizedBox(
                                   height: 16,
                                 ),
                                 Padding(
@@ -242,7 +243,7 @@ class _PrintPageState extends State<PrintPage> {
                                         Theme.of(context).textTheme.bodyLarge,
                                   ),
                                 ),
-                                Divider()
+                                const Divider()
                               ],
                             ),
                           ),
@@ -264,6 +265,48 @@ class _PrintPageState extends State<PrintPage> {
                               );
                             },
                           ),
+                          SliverToBoxAdapter(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const SizedBox(
+                                  height: 16,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    "Custom Activities/Awards:",
+                                    style:
+                                        Theme.of(context).textTheme.bodyLarge,
+                                  ),
+                                ),
+                                const Divider()
+                              ],
+                            ),
+                          ),
+                          SliverList.builder(
+                            itemCount: _customItems.length,
+                            itemBuilder: (context, index) {
+                              return CheckboxCustomItem(
+                                onTap: (p0) {
+                                  if (p0 == true) {
+                                    sendItems.add(_customItems[index]);
+                                  } else {
+                                    sendItems.removeWhere((element) {
+                                      return element.id ==
+                                          _customItems[index].id;
+                                    });
+                                  }
+                                },
+                                item: _customItems[index],
+                              );
+                            },
+                          ),
+                          SliverToBoxAdapter(
+                            child: SizedBox(
+                              height: 36,
+                            ),
+                          )
                         ],
                       );
                     }
@@ -272,10 +315,10 @@ class _PrintPageState extends State<PrintPage> {
         ),
         Column(
           children: [
-            Spacer(),
+            const Spacer(),
             Row(
               children: [
-                Spacer(),
+                const Spacer(),
                 Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: FloatingActionButton.extended(
@@ -286,15 +329,13 @@ class _PrintPageState extends State<PrintPage> {
                             sendACT,
                             sendSAT,
                             sendService,
+                            sendItems,
                             totalHours,
                             gpa);
-                        PdfService().savePdfFile(Uuid().v4(), data);
-                        sendCourse = [];
-                        sendACT = [];
-                        sendSAT = [];
-                        sendService = [];
+
+                        PdfService().savePdfFile(const Uuid().v4(), data);
                       },
-                      label: Row(
+                      label: const Row(
                         children: [
                           Text("Generate"),
                           SizedBox(
@@ -329,11 +370,15 @@ class _PrintPageState extends State<PrintPage> {
     List<Map<String, dynamic>> satData =
         await supabase.from('sat_scores').select();
 
+    List<Map<String, dynamic>> customData =
+        await supabase.from('custom_item').select();
+
     _communityService = [];
     _courses = [];
     gpa = 0;
     _actScores = [];
     _satScores = [];
+    _customItems = [];
 
     for (var element in actData) {
       _actScores.add(ACTScore.fromMap(element));
@@ -358,5 +403,9 @@ class _PrintPageState extends State<PrintPage> {
       total += (4 - element.finalGrade.index);
     }
     gpa = total / _courses.length;
+
+    for (var element in customData) {
+      _customItems.add(CustomItem.fromMap(element));
+    }
   }
 }

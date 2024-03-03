@@ -28,19 +28,17 @@ class _ForgotPasswordState extends State<ForgotPassword> {
       try {
         await supabase.auth.resetPasswordForEmail(emailController.text.trim());
       } catch (error) {
-        if (context.mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: const Text("An unexpected error occurred"),
-              backgroundColor: Theme.of(context).colorScheme.error,
-            ),
-          );
-        }
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: const Text("An unexpected error occurred"),
+            backgroundColor: Theme.of(context).colorScheme.error,
+          ),
+        );
       } finally {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: const Text("Email sent"),
+            const SnackBar(
+              content: Text("Email sent"),
             ),
           );
           Navigator.pop(context);
@@ -80,7 +78,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(),
+      appBar: const CustomAppBar(),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(
@@ -92,9 +90,9 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                 "Password Reset",
                 style: Theme.of(context).textTheme.titleLarge,
               ),
-              Text(
+              const Text(
                   "Enter the email you registered with to reset your password"),
-              SizedBox(
+              const SizedBox(
                 height: 16,
               ),
               CustomTextInput(
@@ -102,10 +100,10 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   controller: emailController,
                   obscureText: false,
                   keyboardType: TextInputType.emailAddress,
-                  autofillHints: [AutofillHints.email],
+                  autofillHints: const [AutofillHints.email],
                   hintText: "Email",
                   textInputAction: TextInputAction.done),
-              SizedBox(
+              const SizedBox(
                 height: 16,
               ),
               CTAButton(

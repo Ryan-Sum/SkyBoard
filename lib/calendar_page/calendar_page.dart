@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:icalendar_parser/icalendar_parser.dart';
@@ -7,7 +6,6 @@ import 'package:sky_board/calendar_page/calendar.dart';
 import 'package:sky_board/calendar_page/event.dart';
 import 'package:sky_board/calendar_page/user_event.dart';
 import 'package:sky_board/main.dart';
-import 'package:table_calendar/table_calendar.dart';
 
 import 'package:flutter/services.dart' show rootBundle;
 

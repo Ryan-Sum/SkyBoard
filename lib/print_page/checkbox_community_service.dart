@@ -40,14 +40,14 @@ class _CheckboxCommunityServiceState extends State<CheckboxCommunityService> {
                   }),
               Text(
                   "${DateFormat('M/d/y').format(widget.service.date)} @ ${widget.service.organizationName}"),
-              Spacer(),
+              const Spacer(),
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Text("Hours ${widget.service.hours}"),
               ),
             ],
           ),
-          Divider()
+          const Divider()
         ],
       ),
     );

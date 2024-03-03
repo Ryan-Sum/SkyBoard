@@ -96,7 +96,7 @@ class _SocialMediaState extends State<SocialMedia> {
                                 ..setNavigationDelegate(NavigationDelegate())
                                 ..loadRequest(Uri.parse(accounts[index].url));
                           return Scaffold(
-                            appBar: CustomAppBar(),
+                            appBar: const CustomAppBar(),
                             body: WebViewWidget(
                               controller: controllerTwitter,
                               gestureRecognizers: gestureRecognizers,
@@ -123,8 +123,8 @@ class _SocialMediaState extends State<SocialMedia> {
                         child: Row(
                           children: [
                             Text(accounts[index].orgName),
-                            Spacer(),
-                            Icon(
+                            const Spacer(),
+                            const Icon(
                               Icons.arrow_forward_ios_rounded,
                               size: 16,
                             )

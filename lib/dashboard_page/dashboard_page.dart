@@ -1,13 +1,15 @@
 import 'package:animate_gradient/animate_gradient.dart';
 import 'package:flutter/material.dart';
-import 'package:pinput/pinput.dart';
+import 'package:sky_board/custom_item_page/custom_item_page.dart';
 import 'package:sky_board/dashboard_page/custom_widgets/course_tile.dart';
+import 'package:sky_board/dashboard_page/custom_widgets/custom_tile.dart';
 import 'package:sky_board/dashboard_page/custom_widgets/service_hour_tile.dart';
 import 'package:sky_board/dashboard_page/custom_widgets/test_score_tile.dart';
 import 'package:sky_board/main.dart';
 import 'package:sky_board/models/act_score.dart';
 import 'package:sky_board/models/community_service.dart';
 import 'package:sky_board/models/course.dart';
+import 'package:sky_board/models/custom_item.dart';
 import 'package:sky_board/models/sat_score.dart';
 import 'package:sky_board/models/student.dart';
 
@@ -31,6 +33,7 @@ class _DashboardPageState extends State<DashboardPage> {
   late List<CommunityService> _communityService = [];
   late List<ACTScore> _actScores = [];
   late List<SATScore> _satScores = [];
+  late List<CustomItem> _customItems = [];
 
   late double gpa = 0;
   late double totalHours = 0;
@@ -148,11 +151,15 @@ class _DashboardPageState extends State<DashboardPage> {
     List<Map<String, dynamic>> satData =
         await supabase.from('sat_scores').select();
 
+    List<Map<String, dynamic>> customData =
+        await supabase.from('custom_item').select();
+
     _communityService = [];
     _courses = [];
     gpa = 0;
     _actScores = [];
     _satScores = [];
+    _customItems = [];
 
     for (var element in actData) {
       _actScores.add(ACTScore.fromMap(element));
@@ -177,8 +184,13 @@ class _DashboardPageState extends State<DashboardPage> {
       total += (4 - element.finalGrade.index);
     }
     gpa = total / _courses.length;
-    if (_courses.length == 0) {
+    if (_courses.isEmpty) {
       gpa = 0;
+    }
+
+    for (var element in customData) {
+      CustomItem item = CustomItem.fromMap(element);
+      _customItems.add(item);
     }
     tiles = [
       CourseTile(
@@ -198,8 +210,34 @@ class _DashboardPageState extends State<DashboardPage> {
         satScores: _satScores,
         actScores: _actScores,
         key: GlobalKey(),
+      ),
+      SizedBox(
+        key: GlobalKey(),
+        width: 64,
+        height: 64,
+        child: IconButton(
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => CustomItemPage(
+                      refresh: refreshData,
+                    ),
+                  ));
+            },
+            icon: const Icon(Icons.add_circle_rounded)),
       )
     ];
+
+    for (var element in _customItems) {
+      tiles.insert(
+          tiles.length - 1,
+          CustomTile(
+            item: element,
+            refresh: refreshData,
+            key: GlobalKey(),
+          ));
+    }
   }
 
   Future<void> refreshData() async {
@@ -218,7 +256,7 @@ class _DashboardPageState extends State<DashboardPage> {
     _communityService = [];
     _courses = [];
     gpa = 0;
-    if (_courses.length == 0) {
+    if (_courses.isEmpty) {
       setState(() {
         gpa = 0;
       });

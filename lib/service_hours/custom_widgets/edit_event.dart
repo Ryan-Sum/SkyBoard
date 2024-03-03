@@ -277,7 +277,7 @@ class _EditEventPageState extends State<EditEventPage> {
                                 .from("community_service")
                                 .upsert(service.toMap());
                           } on Error {
-                            if (mounted) {
+                            if (context.mounted) {
                               ScaffoldMessenger.of(context)
                                   .showSnackBar(SnackBar(
                                 content: const Text(
@@ -287,7 +287,7 @@ class _EditEventPageState extends State<EditEventPage> {
                               ));
                             }
                           } finally {
-                            if (mounted) {
+                            if (context.mounted) {
                               Navigator.pop(context);
 
                               ScaffoldMessenger.of(context)
@@ -339,7 +339,7 @@ class _EditEventPageState extends State<EditEventPage> {
                                         });
                                       }
 
-                                      if (mounted) {
+                                      if ((context.mounted)) {
                                         Navigator.pop(context);
                                         Navigator.pop(context);
                                         Navigator.pop(context);

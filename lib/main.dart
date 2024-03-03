@@ -10,8 +10,10 @@ Future<void> main() async {
     url: 'https://rphoengpbmluulmytwgr.supabase.co',
     anonKey:
         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJwaG9lbmdwYm1sdXVsbXl0d2dyIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTc0Njg5MjQsImV4cCI6MjAxMzA0NDkyNH0.MF3P7FAKXPVGhsfIxuZhTYhs7VL-WNhtVXIgvieZx4c',
-    authFlowType: AuthFlowType.pkce,
+    authOptions:
+        const FlutterAuthClientOptions(authFlowType: AuthFlowType.pkce),
   );
+
   runApp(const ProviderScope(child: MyApp()));
 }
 
@@ -24,7 +26,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'SkyBoard',
+      title: 'SkyBoard LLC',
       theme: LightTheme().lightTheme(context),
       darkTheme: DarkTheme().darkTheme(context),
       home: const SplashScreen(),

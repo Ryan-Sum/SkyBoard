@@ -1,7 +1,5 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:sky_board/forgot_password/forgot_password.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:sky_board/global_widgets/cta_button.dart';
 import 'package:sky_board/global_widgets/custom_app_bar.dart';
 import 'package:sky_board/global_widgets/custom_text_input.dart';
@@ -25,7 +23,6 @@ class _SignUpState extends State<SignUp> {
   late final TextEditingController emailController;
   late final TextEditingController passwordController;
 
-  late Student _student;
   late final GlobalKey<FormState> formKey;
 
   String? validatePassword(String? password) {
@@ -86,7 +83,7 @@ class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(),
+      appBar: const CustomAppBar(),
       body: SafeArea(
           child: Form(
         key: formKey,
@@ -94,7 +91,7 @@ class _SignUpState extends State<SignUp> {
           slivers: [
             SliverToBoxAdapter(
               child: Padding(
-                padding: EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(16.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -102,14 +99,14 @@ class _SignUpState extends State<SignUp> {
                       "Sign Up",
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 16,
                     ),
                     CustomTextInput(
                       controller: firstNameController,
                       obscureText: false,
                       keyboardType: TextInputType.name,
-                      autofillHints: [AutofillHints.givenName],
+                      autofillHints: const [AutofillHints.givenName],
                       hintText: "First Name",
                       textInputAction: TextInputAction.next,
                       validator: (p0) {
@@ -120,14 +117,14 @@ class _SignUpState extends State<SignUp> {
                         }
                       },
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 16,
                     ),
                     CustomTextInput(
                       controller: lastNameController,
                       obscureText: false,
                       keyboardType: TextInputType.name,
-                      autofillHints: [AutofillHints.familyName],
+                      autofillHints: const [AutofillHints.familyName],
                       hintText: "Last Name",
                       textInputAction: TextInputAction.next,
                       validator: (p0) {
@@ -138,14 +135,14 @@ class _SignUpState extends State<SignUp> {
                         }
                       },
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 16,
                     ),
                     CustomTextInput(
                       controller: graduationYearController,
                       obscureText: false,
                       keyboardType: TextInputType.datetime,
-                      autofillHints: [],
+                      autofillHints: const [],
                       hintText: "Graduation Year (Ex. 2025)",
                       textInputAction: TextInputAction.next,
                       validator: (p0) {
@@ -160,7 +157,7 @@ class _SignUpState extends State<SignUp> {
                         }
                       },
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 16,
                     ),
                     CustomTextInput(
@@ -184,11 +181,11 @@ class _SignUpState extends State<SignUp> {
                       hintText: "Password",
                       textInputAction: TextInputAction.done,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 16,
                     ),
                     CTAButton(
-                      text: "Sign In",
+                      text: "Sign Up",
                       onTap: () async {
                         if (formKey.currentState!.validate()) {
                           try {
@@ -216,24 +213,23 @@ class _SignUpState extends State<SignUp> {
                             await supabase
                                 .from('students')
                                 .upsert(sendStudent.toMap());
+                          } on AuthException catch (e) {
+                            if (context.mounted) {
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(SnackBar(
+                                content: Text("Error: ${e.message}"),
+                                backgroundColor:
+                                    Theme.of(context).colorScheme.error,
+                              ));
+                            }
                           } on Exception {
-                            if (mounted) {
+                            if (context.mounted) {
                               ScaffoldMessenger.of(context)
                                   .showSnackBar(SnackBar(
                                 content: const Text(
                                     "An error occurred. Please try again later."),
                                 backgroundColor:
                                     Theme.of(context).colorScheme.error,
-                              ));
-                            }
-                          } finally {
-                            if (mounted) {
-                              Navigator.pop(context);
-
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(const SnackBar(
-                                content: Text(
-                                    "Account Details successfully updated"),
                               ));
                             }
                           }
@@ -247,13 +243,69 @@ class _SignUpState extends State<SignUp> {
                         }
                       },
                     ),
+                    const SizedBox(
+                      height: 24,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Expanded(
+                            child: Divider(
+                          thickness: 0.5,
+                          color: Colors.grey[400],
+                        )),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: Text("or",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodySmall!
+                                  .copyWith(color: Colors.grey[500])),
+                        ),
+                        Expanded(
+                            child: Divider(
+                          thickness: 0.5,
+                          color: Colors.grey[400],
+                        )),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 24,
+                    ),
+                    ElevatedButton(
+                        onPressed: () {
+                          _linkedinLogin(context);
+                        },
+                        style: ButtonStyle(
+                            side: MaterialStateProperty.all(const BorderSide(
+                                width: 4,
+                                color: Color.fromARGB(255, 0, 118, 181)))),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            const Text(
+                              "LinkedIn",
+                              style: TextStyle(
+                                  color: Color.fromARGB(255, 0, 118, 181)),
+                            ),
+                            const SizedBox(
+                              width: 8,
+                            ),
+                            SizedBox(
+                                height: 20,
+                                width: 20,
+                                child: SvgPicture.asset(
+                                    "assets/svgs/linkedIn_icon.svg"))
+                          ],
+                        )),
                     Center(
                       child: IconButton(
                           onPressed: () async {
                             await launchUrl(Uri.parse(
                                 "https://ryan-sum.github.io/SkyBoard/#/privacy?id=privacy-policy"));
                           },
-                          icon: Text("Privacy Policy")),
+                          icon: const Text("Privacy Policy")),
                     ),
                   ],
                 ),
@@ -263,5 +315,34 @@ class _SignUpState extends State<SignUp> {
         ),
       )),
     );
+  }
+}
+
+void _linkedinLogin(BuildContext context) async {
+  showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      });
+  try {
+    await supabase.auth.signInWithOAuth(
+      OAuthProvider.linkedinOidc,
+      authScreenLaunchMode: LaunchMode.externalApplication,
+      scopes: "w_member_social",
+      redirectTo: "com.sumiantoro.skyboard://login-callback/",
+    );
+  } catch (e) {
+    if (context.mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: const Text("An error occurred"),
+        backgroundColor: Theme.of(context).colorScheme.error,
+      ));
+    }
+  }
+  if (context.mounted) {
+    Navigator.pop(context);
   }
 }

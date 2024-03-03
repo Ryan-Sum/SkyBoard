@@ -695,7 +695,7 @@ class _EditCourseState extends State<EditCourse> {
                             });
                         await supabase.from("courses").upsert(course.toMap());
                       } on Error {
-                        if (mounted) {
+                        if (context.mounted) {
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                             content: const Text(
                                 "An error occurred. Please try again later."),
@@ -704,7 +704,7 @@ class _EditCourseState extends State<EditCourse> {
                           ));
                         }
                       } finally {
-                        if (mounted) {
+                        if (context.mounted) {
                           Navigator.pop(context);
 
                           ScaffoldMessenger.of(context)
@@ -751,7 +751,7 @@ class _EditCourseState extends State<EditCourse> {
                                         .from("courses")
                                         .delete()
                                         .match({'id': widget.course.id});
-                                    if (mounted) {
+                                    if (context.mounted) {
                                       Navigator.pop(context);
                                       Navigator.pop(context);
                                       Navigator.pop(context);

@@ -1,8 +1,7 @@
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:sky_board/forgot_password/forgot_password.dart';
 import 'package:sky_board/global_widgets/cta_button.dart';
 import 'package:sky_board/global_widgets/custom_app_bar.dart';
@@ -109,7 +108,7 @@ class _LoginPageState extends State<LoginPage> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => ForgotPassword(),
+                                  builder: (context) => const ForgotPassword(),
                                 ));
                           },
                           child: Text("Forgot Password?",
@@ -162,7 +161,7 @@ class _LoginPageState extends State<LoginPage> {
                               );
                             }
                           } finally {
-                            if (mounted) {
+                            if (context.mounted) {
                               Navigator.pop(context);
                             }
                           }
@@ -176,6 +175,36 @@ class _LoginPageState extends State<LoginPage> {
                         }
                       },
                     ),
+                    const SizedBox(
+                      height: 24,
+                    ),
+                    ElevatedButton(
+                        onPressed: () {
+                          _linkedinLogin(context);
+                        },
+                        style: ButtonStyle(
+                            side: MaterialStateProperty.all(const BorderSide(
+                                width: 4,
+                                color: Color.fromARGB(255, 0, 118, 181)))),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            const Text(
+                              "Sign In with LinkedIn",
+                              style: TextStyle(
+                                  color: Color.fromARGB(255, 0, 118, 181)),
+                            ),
+                            const SizedBox(
+                              width: 8,
+                            ),
+                            SizedBox(
+                                height: 20,
+                                width: 20,
+                                child: SvgPicture.asset(
+                                    "assets/svgs/linkedIn_icon.svg"))
+                          ],
+                        )),
                     const Spacer(),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -243,5 +272,22 @@ class _LoginPageState extends State<LoginPage> {
     } else {
       return "Please enter a valid email.";
     }
+  }
+}
+
+void _linkedinLogin(BuildContext context) async {
+  try {
+    bool success = await supabase.auth.signInWithOAuth(
+      OAuthProvider.linkedinOidc,
+      authScreenLaunchMode: LaunchMode.externalApplication,
+      scopes: "w_member_social",
+      redirectTo: "com.sumiantoro.skyboard://login-callback/",
+    );
+    print(success);
+    if (!success) {
+      throw FlutterError("User Canceld Sign In");
+    }
+  } on Exception catch (e) {
+    print(e);
   }
 }

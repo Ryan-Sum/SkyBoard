@@ -36,7 +36,7 @@ class _CheckboxCourseState extends State<CheckboxCourse> {
                     widget.onTap(x!);
                   }),
               Text(widget.course.courseName),
-              Spacer(),
+              const Spacer(),
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Text(
@@ -44,7 +44,7 @@ class _CheckboxCourseState extends State<CheckboxCourse> {
               ),
             ],
           ),
-          Divider()
+          const Divider()
         ],
       ),
     );

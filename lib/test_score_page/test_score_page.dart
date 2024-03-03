@@ -173,7 +173,7 @@ class _TestScorePageState extends State<TestScorePage> {
           SliverList.builder(
               itemCount: widget.satScores.length + widget.actScores.length,
               itemBuilder: (context, index) {
-                if (index == 0) {
+                if (index == 0 && widget.actScores.isNotEmpty) {
                   return Padding(
                     padding: const EdgeInsets.fromLTRB(16, 16, 16, 0.0),
                     child: Column(
@@ -184,10 +184,12 @@ class _TestScorePageState extends State<TestScorePage> {
                           textAlign: TextAlign.left,
                         ),
                         const Divider(),
-                        ACTEntryTile(
-                          refresh: widget.refresh,
-                          score: widget.actScores[index],
-                        )
+                        widget.actScores.isEmpty
+                            ? Container()
+                            : ACTEntryTile(
+                                refresh: widget.refresh,
+                                score: widget.actScores[index],
+                              )
                       ],
                     ),
                   );
@@ -201,7 +203,10 @@ class _TestScorePageState extends State<TestScorePage> {
                     ),
                   );
                 }
-                if (index == widget.actScores.length) {
+                print("Index: $index\Act Scores: ${widget.actScores.length}");
+                if (index == 0 ||
+                    (widget.actScores.isNotEmpty &&
+                        index == widget.actScores.length)) {
                   return Padding(
                     padding: const EdgeInsets.fromLTRB(16, 16, 16, 0.0),
                     child: Column(

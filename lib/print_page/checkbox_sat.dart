@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import 'package:sky_board/models/act_score.dart';
 import 'package:sky_board/models/sat_score.dart';
 
 class CheckboxSAT extends StatefulWidget {
@@ -40,7 +39,7 @@ class _CheckboxSATState extends State<CheckboxSAT> {
                   }),
               Text(
                   "${DateFormat('MMMM yyyy').format(widget.sat.dateTaken)} SAT"),
-              Spacer(),
+              const Spacer(),
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Text(
@@ -48,7 +47,7 @@ class _CheckboxSATState extends State<CheckboxSAT> {
               ),
             ],
           ),
-          Divider()
+          const Divider()
         ],
       ),
     );
